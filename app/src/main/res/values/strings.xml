@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">CitRep</string>
+    <string name="app_description">Los reportes a las autoridades al alcanze de su bolsillo</string>
+    <string name="user_hint">Usuario</string>
+    <string name="password_hint">Contraseña</string>
+    <string name="login">Login</string>
+    <string name="sign_up_label">Aún no tienes una cuenta registrate</string>
+</resources>

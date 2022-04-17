@@ -1,7 +1,7 @@
-package com.tonyakitori.citrep.framework
+package com.tonyakitori.citrep.framework.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.tonyakitori.citrep.R
 
 class MainActivity : AppCompatActivity() {

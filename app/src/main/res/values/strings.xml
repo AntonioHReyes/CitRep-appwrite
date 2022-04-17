@@ -3,6 +3,13 @@
     <string name="app_description">Los reportes a las autoridades al alcanze de su bolsillo</string>
     <string name="user_hint">Usuario</string>
     <string name="password_hint">Contraseña</string>
-    <string name="login">Login</string>
+    <string name="btn_login">Login</string>
     <string name="sign_up_label">Aún no tienes una cuenta registrate</string>
+    <string name="email_hint">Email</string>
+    <string name="btn_sign_up">Registrar</string>
+    <string name="account_login_label">Ya tienes una cuenta inicia sesión</string>
+    <string name="confirm_password_hint">Confirma tu contraseña</string>
+    <string name="sign_up_instructions">Estas a nada de finalizar tu registro</string>
+    <string name="name_hint">Nombre</string>
+    <string name="email_placeholder">algo@gmail.com</string>
 </resources>

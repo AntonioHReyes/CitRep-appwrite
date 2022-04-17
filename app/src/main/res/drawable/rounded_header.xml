@@ -6,8 +6,8 @@
         android:right="-400dp">
         <shape android:shape="oval">
             <gradient
-                android:startColor="#F07B26"
-                android:endColor="#F8BA4C"/>
+                android:endColor="@color/kournikova"
+                android:startColor="@color/carrot_orange" />
         </shape>
     </item>
 </layer-list>

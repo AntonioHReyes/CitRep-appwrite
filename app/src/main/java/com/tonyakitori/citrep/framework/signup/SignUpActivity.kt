@@ -4,17 +4,17 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
+import androidx.core.view.isVisible
+import com.tonyakitori.citrep.R
 import com.tonyakitori.citrep.databinding.ActivitySignUpBinding
 import com.tonyakitori.citrep.domain.entities.AccountEntity
-import com.tonyakitori.citrep.framework.helpers.AppWriteClientManager
 import com.tonyakitori.citrep.framework.login.LoginActivity
-import kotlinx.coroutines.launch
-import org.koin.android.ext.android.inject
+import com.tonyakitori.citrep.framework.utils.longToast
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SignUpActivity : AppCompatActivity() {
 
-    private val appWriteClient: AppWriteClientManager by inject()
+    private val signUpViewModel: SignUpViewModel by viewModel()
 
     private lateinit var binding: ActivitySignUpBinding
 
@@ -25,8 +25,22 @@ class SignUpActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setUpViews()
+        setUpObservers()
     }
 
+    private fun setUpObservers() {
+        signUpViewModel.accountCreationLoading.observe(this, ::handleLoading)
+        signUpViewModel.account.observe(this, ::handleSuccess)
+        signUpViewModel.error.observe(this) { longToast(getString(R.string.ops_error)) }
+    }
+
+    private fun handleLoading(show: Boolean) {
+        binding.progress.isVisible = show
+    }
+
+    private fun handleSuccess(accountEntity: AccountEntity) {
+        startActivity(Intent(this, LoginActivity::class.java))
+    }
 
     private fun setUpViews() = with(binding) {
 
@@ -49,28 +63,13 @@ class SignUpActivity : AppCompatActivity() {
             return@with
         }
 
-        lifecycleScope.launch {
-            try {
-                appWriteClient.createAccount(
-                    AccountEntity(
-                        email = edtEmail.text.toString(),
-                        password = edtPassword.text.toString(),
-                        name = edtName.text.toString()
-                    )
-                )
-
-                Toast.makeText(
-                    this@SignUpActivity,
-                    "El registro ha sido exitoso",
-                    Toast.LENGTH_SHORT
-                ).show()
-                startActivity(Intent(this@SignUpActivity, LoginActivity::class.java))
-                finish()
-            } catch (e: Exception) {
-                Toast.makeText(this@SignUpActivity, "Ops! ocurrio un error", Toast.LENGTH_SHORT)
-                    .show()
-            }
-        }
+        signUpViewModel.createAccount(
+            AccountEntity(
+                email = edtEmail.text.toString(),
+                password = edtPassword.text.toString(),
+                name = edtName.text.toString()
+            )
+        )
     }
 
     private fun validateForm(): Boolean = with(binding) {

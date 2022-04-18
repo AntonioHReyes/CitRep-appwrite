@@ -6,23 +6,23 @@
     android:layout_height="match_parent"
     tools:context=".framework.login.LoginActivity">
 
-
     <LinearLayout
         android:id="@+id/login_header"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintVertical_weight="1"
+        android:background="@drawable/rounded_header"
         android:gravity="center"
         android:orientation="vertical"
-        android:background="@drawable/rounded_header"
         app:layout_constraintBottom_toTopOf="@id/login_form_container"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_weight="1">
 
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:contentDescription="@string/logo_content_description"
             android:src="@drawable/ic_baseline_location_city_24"
             app:tint="@color/white" />
 
@@ -30,97 +30,105 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:text="@string/app_name"
-            android:textColor="@color/white"
             android:paddingVertical="10dp"
-            android:textSize="30sp"/>
+            android:text="@string/app_name"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="30sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:text="@string/app_description"
-            android:textColor="@color/white"
             android:paddingVertical="10dp"
-            android:textSize="14sp"/>
+            android:text="@string/app_description"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
 
     </LinearLayout>
-
 
     <LinearLayout
         android:id="@+id/login_form_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintVertical_weight="1"
         android:gravity="center"
         android:orientation="vertical"
         android:paddingHorizontal="20dp"
-        app:layout_constraintTop_toBottomOf="@id/login_header"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/login_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/login_button">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/login_header"
+        app:layout_constraintVertical_weight="1">
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:placeholderText="@string/email_placeholder"
-            android:paddingVertical="10dp">
+            android:paddingVertical="10dp"
+            app:placeholderText="@string/email_placeholder">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edt_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/transparent"
-                android:hint="@string/user_hint"
-                />
+                android:hint="@string/user_hint" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:passwordToggleEnabled="true"
-            android:paddingVertical="10dp">
+            android:paddingVertical="10dp"
+            app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edt_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/transparent"
-                android:inputType="textPassword"
                 android:hint="@string/password_hint"
-                />
+                android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
 
     </LinearLayout>
 
-
     <Button
         android:id="@+id/login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/btn_login"
         android:layout_marginVertical="10dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/btn_login"
+        app:layout_constraintBottom_toTopOf="@id/register_text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/login_form_container"
-        app:layout_constraintBottom_toTopOf="@id/register_text"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/login_form_container" />
 
     <TextView
         android:id="@+id/register_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/sign_up_label"
-        android:textStyle="italic"
-        android:textSize="14sp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="50dp"
-        app:layout_constraintTop_toBottomOf="@id/login_button"
+        android:text="@string/sign_up_label"
+        android:textSize="14sp"
+        android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/login_button" />
+
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

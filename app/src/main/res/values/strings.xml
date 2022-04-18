@@ -12,4 +12,6 @@
     <string name="sign_up_instructions">Estas a nada de finalizar tu registro</string>
     <string name="name_hint">Nombre</string>
     <string name="email_placeholder">algo@gmail.com</string>
+    <string name="logo_content_description">Logo</string>
+    <string name="ops_error">Ops! Ha ocurrido un error, intentalo de nuevo mas tarde</string>
 </resources>

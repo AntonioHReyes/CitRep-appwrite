@@ -1,12 +1,26 @@
 package com.tonyakitori.citrep.di
 
-import com.tonyakitori.citrep.framework.helpers.AppWriteClientManager
+import com.tonyakitori.citrep.data.repositories.AccountRepository
+import com.tonyakitori.citrep.data.repositories.impl.AccountRepositoryImpl
+import com.tonyakitori.citrep.framework.login.LoginViewModel
+import com.tonyakitori.citrep.framework.signup.SignUpViewModel
+import com.tonyakitori.citrep.usecases.CreateAccountSessionUseCase
+import com.tonyakitori.citrep.usecases.CreateAccountUseCase
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val mainModule = module {
 
-    single { AppWriteClientManager(get()) }
+    //Repositories
+    factory<AccountRepository> { AccountRepositoryImpl(get()) }
 
+    //useCases
+    factory { CreateAccountUseCase(get()) }
+    factory { CreateAccountSessionUseCase(get()) }
+
+    //ViewModels
+    viewModel { LoginViewModel(get()) }
+    viewModel { SignUpViewModel(get()) }
 }
 
-val allModules = listOf(mainModule)
+val allModules = listOf(mainModule, appWriteModule)

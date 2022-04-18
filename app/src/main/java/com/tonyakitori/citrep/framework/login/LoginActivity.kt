@@ -2,20 +2,19 @@ package com.tonyakitori.citrep.framework.login
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
+import androidx.core.view.isVisible
+import com.tonyakitori.citrep.R
 import com.tonyakitori.citrep.databinding.ActivityLoginBinding
 import com.tonyakitori.citrep.domain.entities.AccountEntity
-import com.tonyakitori.citrep.framework.helpers.AppWriteClientManager
+import com.tonyakitori.citrep.framework.main.MainActivity
 import com.tonyakitori.citrep.framework.signup.SignUpActivity
-import kotlinx.coroutines.launch
-import org.koin.android.ext.android.inject
+import com.tonyakitori.citrep.framework.utils.longToast
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginActivity : AppCompatActivity() {
 
-    private val appWriteClient: AppWriteClientManager by inject()
+    private val loginVm: LoginViewModel by viewModel()
 
     private lateinit var binding: ActivityLoginBinding
 
@@ -26,8 +25,23 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setUpViews()
+        setUpObservers()
     }
 
+    private fun setUpObservers() {
+
+        loginVm.accountSessionLoading.observe(this, ::handleLoading)
+        loginVm.accountSession.observe(this, ::handleAccountCreation)
+        loginVm.error.observe(this) { longToast(getString(R.string.ops_error)) }
+    }
+
+    private fun handleLoading(show: Boolean) {
+        binding.progress.isVisible = show
+    }
+
+    private fun handleAccountCreation(account: AccountEntity) {
+        startActivity(Intent(this, MainActivity::class.java))
+    }
 
     private fun setUpViews() = with(binding) {
 
@@ -36,21 +50,12 @@ class LoginActivity : AppCompatActivity() {
         }
 
         loginButton.setOnClickListener {
-            lifecycleScope.launch {
-                try {
-                    appWriteClient.creteAccountSession(
-                        AccountEntity(
-                            email = edtEmail.text.toString(),
-                            password = edtPassword.text.toString()
-                        )
-                    )
-                    Toast.makeText(this@LoginActivity, "Exito!!", Toast.LENGTH_SHORT).show()
-                } catch (e: Exception) {
-                    Log.e("ErrorSession", e.toString())
-                    Toast.makeText(this@LoginActivity, "Ops! ocurrio un error", Toast.LENGTH_SHORT)
-                        .show()
-                }
-            }
+            loginVm.createAccountSession(
+                AccountEntity(
+                    email = edtEmail.text.toString(),
+                    password = edtPassword.text.toString()
+                )
+            )
         }
     }
 

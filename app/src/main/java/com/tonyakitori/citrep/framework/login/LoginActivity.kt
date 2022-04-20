@@ -7,7 +7,7 @@ import androidx.core.view.isVisible
 import com.tonyakitori.citrep.R
 import com.tonyakitori.citrep.databinding.ActivityLoginBinding
 import com.tonyakitori.citrep.domain.entities.AccountEntity
-import com.tonyakitori.citrep.framework.main.MainActivity
+import com.tonyakitori.citrep.framework.main.HomeActivity
 import com.tonyakitori.citrep.framework.signup.SignUpActivity
 import com.tonyakitori.citrep.framework.utils.longToast
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -40,13 +40,17 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun handleAccountCreation(account: AccountEntity) {
-        startActivity(Intent(this, MainActivity::class.java))
+        val intent = Intent(this, HomeActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        startActivity(intent)
     }
 
     private fun setUpViews() = with(binding) {
 
         registerText.setOnClickListener {
-            startActivity(Intent(this@LoginActivity, SignUpActivity::class.java))
+            val intent = Intent(this@LoginActivity, SignUpActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            startActivity(intent)
         }
 
         loginButton.setOnClickListener {

@@ -8,5 +8,6 @@ interface AccountRepository {
 
     suspend fun createAccount(accountData: AccountEntity): Flow<Response<AccountEntity>>
     suspend fun createAccountSession(accountData: AccountEntity): Flow<Response<AccountEntity>>
+    suspend fun getAccount(): Flow<Response<AccountEntity>>
 
 }

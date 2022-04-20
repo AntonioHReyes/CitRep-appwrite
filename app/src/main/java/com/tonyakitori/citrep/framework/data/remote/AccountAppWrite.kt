@@ -1,8 +1,8 @@
 package com.tonyakitori.citrep.framework.data.remote
 
-import android.util.Log
 import com.tonyakitori.citrep.data.source.remote.AccountDataSource
 import com.tonyakitori.citrep.domain.entities.AccountEntity
+import com.tonyakitori.citrep.framework.utils.createInfoLog
 import io.appwrite.Client
 import io.appwrite.services.Account
 
@@ -18,7 +18,7 @@ class AccountAppWrite(private val appWriteClient: Client) : AccountDataSource {
             name = accountData.name
         )
 
-        Log.d("UserCreated", response.toString())
+        response.toString().createInfoLog("UserCreated")
     }
 
     override suspend fun createAccountSession(accountData: AccountEntity) {
@@ -26,8 +26,17 @@ class AccountAppWrite(private val appWriteClient: Client) : AccountDataSource {
 
         val response = account.createSession(accountData.email, accountData.password)
 
-        Log.d("UserSessionCreated", response.toString())
+        response.toString().createInfoLog("UserSessionCreated")
     }
 
+    override suspend fun getAccount(): AccountEntity {
+        val account = Account(appWriteClient)
+        val response = account.get()
+
+        return AccountEntity(
+            name = response.name,
+            isVerified = response.emailVerification
+        )
+    }
 
 }

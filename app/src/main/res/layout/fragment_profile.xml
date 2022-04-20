@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".framework.main.fragments.profile.ProfileFragment">
+
+    <LinearLayout
+        android:id="@+id/profile_header"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/rounded_header"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/profile_options"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_weight="1">
+
+        <RelativeLayout
+            android:layout_width="@dimen/image_normal_size"
+            android:layout_height="@dimen/image_normal_size">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_avatar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                tools:src="@drawable/ic_baseline_account_circle_24"
+                tools:visibility="visible" />
+
+            <ImageView
+                android:id="@+id/profile_verified"
+                android:layout_width="@dimen/verified_icon_size"
+                android:layout_height="@dimen/verified_icon_size"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:contentDescription="@string/verified_check_content_description"
+                android:src="@drawable/ic_baseline_check_circle_24"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
+
+            <ProgressBar
+                android:id="@+id/avatar_progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/profile_name"
+            style="@style/ProfileHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/spacing_20"
+            tools:text="Antonio Huerta Reyes" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/profile_options"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profile_header"
+        app:layout_constraintVertical_weight="2">
+
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

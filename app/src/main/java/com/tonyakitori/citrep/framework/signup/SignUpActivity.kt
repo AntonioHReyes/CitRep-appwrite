@@ -39,13 +39,17 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun handleSuccess(accountEntity: AccountEntity) {
-        startActivity(Intent(this, LoginActivity::class.java))
+        val intent = Intent(this, LoginActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        startActivity(intent)
     }
 
     private fun setUpViews() = with(binding) {
 
         loginText.setOnClickListener {
-            startActivity(Intent(this@SignUpActivity, LoginActivity::class.java))
+            val intent = Intent(this@SignUpActivity, LoginActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            startActivity(intent)
             finish()
         }
 

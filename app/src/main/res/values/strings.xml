@@ -4,14 +4,19 @@
     <string name="user_hint">Usuario</string>
     <string name="password_hint">Contraseña</string>
     <string name="btn_login">Login</string>
-    <string name="sign_up_label">Aún no tienes una cuenta registrate</string>
+    <string name="sign_up_label"><u>Aún no tienes una cuenta registrate</u></string>
     <string name="email_hint">Email</string>
     <string name="btn_sign_up">Registrar</string>
-    <string name="account_login_label">Ya tienes una cuenta inicia sesión</string>
+    <string name="account_login_label"><u>Ya tienes una cuenta inicia sesión</u></string>
     <string name="confirm_password_hint">Confirma tu contraseña</string>
     <string name="sign_up_instructions">Estas a nada de finalizar tu registro</string>
     <string name="name_hint">Nombre</string>
     <string name="email_placeholder">algo@gmail.com</string>
     <string name="logo_content_description">Logo</string>
     <string name="ops_error">Ops! Ha ocurrido un error, intentalo de nuevo mas tarde</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_home">Inicio</string>
+    <string name="title_account">Perfil</string>
+    <string name="title_notifications">Notificaciones</string>
+    <string name="verified_check_content_description">verified check</string>
 </resources>

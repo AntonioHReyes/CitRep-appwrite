@@ -6,5 +6,5 @@ interface AccountDataSource {
 
     suspend fun createAccount(accountData: AccountEntity)
     suspend fun createAccountSession(accountData: AccountEntity)
-
+    suspend fun getAccount(): AccountEntity
 }

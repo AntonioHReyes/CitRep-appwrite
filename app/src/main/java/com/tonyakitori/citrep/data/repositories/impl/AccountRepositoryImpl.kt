@@ -27,4 +27,12 @@ class AccountRepositoryImpl(private val accountDataSource: AccountDataSource) : 
         emit(Response.Error(error))
     }.flowOn(Dispatchers.IO)
 
+    override suspend fun getAccount() = flow {
+        emit(Response.Loading)
+        val account = accountDataSource.getAccount()
+        emit(Response.Success(account))
+    }.catch { error ->
+        emit(Response.Error(error))
+    }.flowOn(Dispatchers.IO)
+
 }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".framework.main.fragments.profile.ProfileFragment">
+    tools:context=".framework.ui.main.fragments.profile.ProfileFragment">
 
     <LinearLayout
         android:id="@+id/profile_header"

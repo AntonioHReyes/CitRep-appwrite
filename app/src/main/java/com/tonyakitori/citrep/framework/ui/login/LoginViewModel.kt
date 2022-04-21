@@ -1,4 +1,4 @@
-package com.tonyakitori.citrep.framework.login
+package com.tonyakitori.citrep.framework.ui.login
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -17,8 +17,8 @@ class LoginViewModel(private val createAccountSessionUseCase: CreateAccountSessi
     private val _accountSessionLoading: MutableLiveData<Boolean> = MutableLiveData()
     val accountSessionLoading: LiveData<Boolean> get() = _accountSessionLoading
 
-    private val _accountSession: MutableLiveData<AccountEntity> = MutableLiveData()
-    val accountSession: LiveData<AccountEntity> get() = _accountSession
+    private val _accountSession: MutableLiveData<AccountEntity?> = MutableLiveData()
+    val accountSession: LiveData<AccountEntity?> get() = _accountSession
 
     private val _error: MutableLiveData<Unit> = MutableLiveData()
     val error: LiveData<Unit> get() = _error

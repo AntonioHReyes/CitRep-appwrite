@@ -19,4 +19,7 @@
     <string name="title_account">Perfil</string>
     <string name="title_notifications">Notificaciones</string>
     <string name="verified_check_content_description">verified check</string>
+    <string name="complain_description">¿Que incidente presentas hoy?</string>
+    <string name="publish">Publicar</string>
+    <string name="write_compliant_hint">Escribe tu problema aqui …</string>
 </resources>

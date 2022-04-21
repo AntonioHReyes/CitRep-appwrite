@@ -26,4 +26,9 @@
         <item name="android:textSize">@dimen/medium_text_size</item>
     </style>
 
+    <style name="HomeToolbarText" parent="Theme.CitRep">
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">@dimen/small_text_size</item>
+    </style>
+
 </resources>

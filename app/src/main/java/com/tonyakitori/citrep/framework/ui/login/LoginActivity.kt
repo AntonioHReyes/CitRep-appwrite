@@ -1,4 +1,4 @@
-package com.tonyakitori.citrep.framework.login
+package com.tonyakitori.citrep.framework.ui.login
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,8 +7,8 @@ import androidx.core.view.isVisible
 import com.tonyakitori.citrep.R
 import com.tonyakitori.citrep.databinding.ActivityLoginBinding
 import com.tonyakitori.citrep.domain.entities.AccountEntity
-import com.tonyakitori.citrep.framework.main.HomeActivity
-import com.tonyakitori.citrep.framework.signup.SignUpActivity
+import com.tonyakitori.citrep.framework.ui.main.HomeActivity
+import com.tonyakitori.citrep.framework.ui.signup.SignUpActivity
 import com.tonyakitori.citrep.framework.utils.longToast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -31,7 +31,7 @@ class LoginActivity : AppCompatActivity() {
     private fun setUpObservers() {
 
         loginVm.accountSessionLoading.observe(this, ::handleLoading)
-        loginVm.accountSession.observe(this, ::handleAccountCreation)
+        loginVm.accountSession.observe(this, ::handleAccountSessionCreation)
         loginVm.error.observe(this) { longToast(getString(R.string.ops_error)) }
     }
 
@@ -39,7 +39,7 @@ class LoginActivity : AppCompatActivity() {
         binding.progress.isVisible = show
     }
 
-    private fun handleAccountCreation(account: AccountEntity) {
+    private fun handleAccountSessionCreation(account: AccountEntity?) {
         val intent = Intent(this, HomeActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(intent)

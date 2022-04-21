@@ -1,4 +1,4 @@
-package com.tonyakitori.citrep.framework.main
+package com.tonyakitori.citrep.framework.ui.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

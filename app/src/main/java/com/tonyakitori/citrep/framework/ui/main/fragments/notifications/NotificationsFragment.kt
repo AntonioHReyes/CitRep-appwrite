@@ -1,4 +1,4 @@
-package com.tonyakitori.citrep.framework.main.fragments.notifications
+package com.tonyakitori.citrep.framework.ui.main.fragments.notifications
 
 import android.os.Bundle
 import android.view.LayoutInflater

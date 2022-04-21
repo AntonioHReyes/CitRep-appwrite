@@ -1,4 +1,4 @@
-package com.tonyakitori.citrep.framework.signup
+package com.tonyakitori.citrep.framework.ui.signup
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,7 +8,7 @@ import androidx.core.view.isVisible
 import com.tonyakitori.citrep.R
 import com.tonyakitori.citrep.databinding.ActivitySignUpBinding
 import com.tonyakitori.citrep.domain.entities.AccountEntity
-import com.tonyakitori.citrep.framework.login.LoginActivity
+import com.tonyakitori.citrep.framework.ui.login.LoginActivity
 import com.tonyakitori.citrep.framework.utils.longToast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -38,7 +38,7 @@ class SignUpActivity : AppCompatActivity() {
         binding.progress.isVisible = show
     }
 
-    private fun handleSuccess(accountEntity: AccountEntity) {
+    private fun handleSuccess(accountEntity: AccountEntity?) {
         val intent = Intent(this, LoginActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(intent)

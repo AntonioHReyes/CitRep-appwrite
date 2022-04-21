@@ -1,4 +1,4 @@
-package com.tonyakitori.citrep.framework.main.fragments.notifications
+package com.tonyakitori.citrep.framework.ui.main.fragments.notifications
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

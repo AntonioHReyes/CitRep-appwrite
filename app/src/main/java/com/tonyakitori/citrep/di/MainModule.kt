@@ -4,9 +4,10 @@ import com.tonyakitori.citrep.data.repositories.AccountRepository
 import com.tonyakitori.citrep.data.repositories.AvatarRepository
 import com.tonyakitori.citrep.data.repositories.impl.AccountRepositoryImpl
 import com.tonyakitori.citrep.data.repositories.impl.AvatarRepositoryImpl
-import com.tonyakitori.citrep.framework.login.LoginViewModel
-import com.tonyakitori.citrep.framework.main.fragments.profile.ProfileViewModel
-import com.tonyakitori.citrep.framework.signup.SignUpViewModel
+import com.tonyakitori.citrep.framework.ui.login.LoginViewModel
+import com.tonyakitori.citrep.framework.ui.main.fragments.home.HomeViewModel
+import com.tonyakitori.citrep.framework.ui.main.fragments.profile.ProfileViewModel
+import com.tonyakitori.citrep.framework.ui.signup.SignUpViewModel
 import com.tonyakitori.citrep.usecases.CreateAccountSessionUseCase
 import com.tonyakitori.citrep.usecases.CreateAccountUseCase
 import com.tonyakitori.citrep.usecases.GetAccountUseCase
@@ -30,6 +31,7 @@ val mainModule = module {
     viewModel { LoginViewModel(get()) }
     viewModel { SignUpViewModel(get()) }
     viewModel { ProfileViewModel(get(), get()) }
+    viewModel { HomeViewModel(get()) }
 }
 
-val allModules = listOf(mainModule, appWriteModule)
+val allModules = listOf(mainModule, appWriteModule, servicesModule)

@@ -1,4 +1,4 @@
-package com.tonyakitori.citrep.framework.signup
+package com.tonyakitori.citrep.framework.ui.signup
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -16,8 +16,8 @@ class SignUpViewModel(private val createAccountUseCase: CreateAccountUseCase) : 
     private val _accountCreationLoading: MutableLiveData<Boolean> = MutableLiveData()
     val accountCreationLoading: LiveData<Boolean> get() = _accountCreationLoading
 
-    private val _account: MutableLiveData<AccountEntity> = MutableLiveData()
-    val account: LiveData<AccountEntity> get() = _account
+    private val _account: MutableLiveData<AccountEntity?> = MutableLiveData()
+    val account: LiveData<AccountEntity?> get() = _account
 
     private val _error: MutableLiveData<Unit> = MutableLiveData()
     val error: LiveData<Unit> get() = _error

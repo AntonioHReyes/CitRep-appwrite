@@ -4,14 +4,21 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <dimen name="image_normal_size">100dp</dimen>
+    <dimen name="image_medium_size">65dp</dimen>
+    <dimen name="image_small_size">45dp</dimen>
+
+    <dimen name="toolbar_icon_size">35dp</dimen>
 
     <dimen name="big_text_size">30sp</dimen>
     <dimen name="medium_text_size">22sp</dimen>
     <dimen name="regular_text_size">14sp</dimen>
-    <dimen name="small_text_size">10sp</dimen>
+    <dimen name="small_text_size">12sp</dimen>
+    <dimen name="extra_small_text_size">10sp</dimen>
 
     <dimen name="spacing_10">10dp</dimen>
     <dimen name="spacing_20">20dp</dimen>
     <dimen name="spacing_50">50dp</dimen>
     <dimen name="verified_icon_size">25dp</dimen>
+    <dimen name="spacing_5">5dp</dimen>
+    <dimen name="spacing_15">15dp</dimen>
 </resources>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".framework.login.LoginActivity">
+    tools:context=".framework.ui.login.LoginActivity">
 
     <LinearLayout
         android:id="@+id/sign_up_header"

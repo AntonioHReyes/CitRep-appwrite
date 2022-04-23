@@ -1,4 +1,4 @@
-package com.tonyakitori.citrep.framework.ui.login
+package com.tonyakitori.citrep.framework.ui.screens.login
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

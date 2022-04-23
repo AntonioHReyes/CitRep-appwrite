@@ -1,4 +1,4 @@
-package com.tonyakitori.citrep.framework.ui.login
+package com.tonyakitori.citrep.framework.ui.screens.login
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,8 +7,8 @@ import androidx.core.view.isVisible
 import com.tonyakitori.citrep.R
 import com.tonyakitori.citrep.databinding.ActivityLoginBinding
 import com.tonyakitori.citrep.domain.entities.AccountEntity
-import com.tonyakitori.citrep.framework.ui.main.HomeActivity
-import com.tonyakitori.citrep.framework.ui.signup.SignUpActivity
+import com.tonyakitori.citrep.framework.ui.screens.main.HomeActivity
+import com.tonyakitori.citrep.framework.ui.screens.signup.SignUpActivity
 import com.tonyakitori.citrep.framework.utils.longToast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

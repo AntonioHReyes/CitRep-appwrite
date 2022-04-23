@@ -22,4 +22,10 @@
     <string name="complain_description">¿Que incidente presentas hoy?</string>
     <string name="publish">Publicar</string>
     <string name="write_compliant_hint">Escribe tu problema aqui …</string>
+    <string name="capture_image_error">No fue posible obtener la imagen</string>
+    <string name="attach_file_content_description">attach file</string>
+
+    <string name="give_persmissions">Es necesario conceder los permisos para continuar.</string>
+    <string name="error_get_image">Ha ocurrido un error en la selección de tu imagen</string>
+    <string name="max_evidences_loaded">Has alcanzado el maximo de evidencias</string>
 </resources>

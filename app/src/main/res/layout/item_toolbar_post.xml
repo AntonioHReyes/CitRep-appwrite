@@ -13,6 +13,7 @@
             android:id="@+id/toolbar_close"
             android:layout_width="@dimen/toolbar_icon_size"
             android:layout_height="@dimen/toolbar_icon_size"
+            android:background="?attr/selectableItemBackground"
             android:src="@drawable/ic_baseline_close_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

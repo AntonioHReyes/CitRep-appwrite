@@ -22,7 +22,7 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 
-            buildConfigField "String", "APPWRITE_ENDPOINT", "\"http://192.168.1.69:80/v1\""
+            buildConfigField "String", "APPWRITE_ENDPOINT", "\"http://192.168.1.73:80/v1\""
             buildConfigField "String", "PROJECT_ID", "\"625e196b3e214519df72\""
             buildConfigField "String", "BUCKET_COMPLAIN_ID", "\"62603496490a2c9d222b\""
         }
@@ -30,7 +30,7 @@ android {
         debug {
             debuggable true
 
-            buildConfigField "String", "APPWRITE_ENDPOINT", "\"http://192.168.1.69:80/v1\""
+            buildConfigField "String", "APPWRITE_ENDPOINT", "\"http://192.168.1.73:80/v1\""
             buildConfigField "String", "PROJECT_ID", "\"625e196b3e214519df72\""
             buildConfigField "String", "BUCKET_COMPLAIN_ID", "\"62603496490a2c9d222b\""
         }
@@ -79,6 +79,9 @@ dependencies {
     def nav_version = "2.4.2"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+    // Dexter
+    implementation 'com.karumi:dexter:6.0.0'
 
     //picasso
     implementation 'com.squareup.picasso:picasso:2.71828'

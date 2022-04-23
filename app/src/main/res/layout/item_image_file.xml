@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="5dp">
+
+    <ImageView
+        android:id="@+id/image_file"
+        android:layout_width="@dimen/image_file_size"
+        android:layout_height="@dimen/image_file_size"
+        android:background="@drawable/bg_rounded"
+        android:contentDescription="@string/attach_file_content_description"
+        android:padding="@dimen/spacing_5"
+        android:scaleType="centerCrop"
+        tools:src="@android:drawable/ic_menu_camera" />
+
+</LinearLayout>

@@ -1,4 +1,4 @@
-package com.tonyakitori.citrep.framework.ui.main.fragments.home
+package com.tonyakitori.citrep.framework.ui.screens.main.fragments.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

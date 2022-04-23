@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".framework.ui.post.NewPostDialogFragment">
+    tools:context=".framework.ui.screens.post.NewPostDialogFragment">
 
     <androidx.cardview.widget.CardView
         android:layout_width="350dp"
@@ -25,16 +25,29 @@
                 android:id="@+id/toolbar_post"
                 layout="@layout/item_toolbar_post" />
 
-            <EditText
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_margin="@dimen/spacing_10"
-                android:autofillHints=""
-                android:background="@drawable/bg_rounded_corners"
-                android:gravity="top"
-                android:hint="@string/write_compliant_hint"
-                android:inputType="text|textMultiLine"
-                android:padding="@dimen/spacing_10" />
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing_10"
+                android:orientation="vertical">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_marginVertical="@dimen/spacing_10"
+                    android:autofillHints=""
+                    android:background="@drawable/bg_rounded_corners"
+                    android:gravity="top"
+                    android:hint="@string/write_compliant_hint"
+                    android:inputType="text|textMultiLine"
+                    android:padding="@dimen/spacing_10" />
+
+
+                <include
+                    android:id="@+id/item_images"
+                    layout="@layout/item_images_list" />
+
+            </LinearLayout>
 
         </LinearLayout>
 

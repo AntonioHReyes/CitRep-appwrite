@@ -7,20 +7,20 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.tonyakitori.citrep.framework.ui.main.fragments.home.HomeFragment"
+        android:name="com.tonyakitori.citrep.framework.ui.screens.main.fragments.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.tonyakitori.citrep.framework.ui.main.fragments.notifications.NotificationsFragment"
+        android:name="com.tonyakitori.citrep.framework.ui.screens.main.fragments.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.tonyakitori.citrep.framework.ui.main.fragments.profile.ProfileFragment"
+        android:name="com.tonyakitori.citrep.framework.ui.screens.main.fragments.profile.ProfileFragment"
         android:label="@string/title_account"
         tools:layout="@layout/fragment_profile" />
 

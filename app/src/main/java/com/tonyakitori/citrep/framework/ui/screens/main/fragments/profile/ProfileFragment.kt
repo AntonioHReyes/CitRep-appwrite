@@ -1,4 +1,4 @@
-package com.tonyakitori.citrep.framework.ui.main.fragments.profile
+package com.tonyakitori.citrep.framework.ui.screens.main.fragments.profile
 
 import android.graphics.BitmapFactory
 import android.os.Bundle

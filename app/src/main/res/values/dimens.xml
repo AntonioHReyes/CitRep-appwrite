@@ -21,4 +21,6 @@
     <dimen name="verified_icon_size">25dp</dimen>
     <dimen name="spacing_5">5dp</dimen>
     <dimen name="spacing_15">15dp</dimen>
+    <dimen name="image_file_attachment_size">40dp</dimen>
+    <dimen name="image_file_size">55dp</dimen>
 </resources>

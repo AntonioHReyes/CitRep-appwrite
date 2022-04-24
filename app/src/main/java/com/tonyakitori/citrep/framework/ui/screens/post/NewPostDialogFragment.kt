@@ -8,6 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.isVisible
+import androidx.core.widget.doOnTextChanged
 import com.tonyakitori.citrep.R
 import com.tonyakitori.citrep.databinding.FragmentNewPostDialogBinding
 import com.tonyakitori.citrep.domain.exceptions.StorageExceptions
@@ -46,6 +48,12 @@ class NewPostDialogFragment : CaptureImagesFragment() {
     private fun setUpObservers() {
         newPostViewModel.evidenceList.observe(viewLifecycleOwner, ::handleEvidencesList)
         newPostViewModel.addEvidenceError.observe(viewLifecycleOwner, ::handleAddEvidenceError)
+        newPostViewModel.postLoading.observe(viewLifecycleOwner, ::handlePostLoading)
+        newPostViewModel.postErrorMediatorLiveData.observe(
+            viewLifecycleOwner,
+            ::handlePostCreationError
+        )
+        newPostViewModel.postCreated.observe(viewLifecycleOwner, ::handlePostCreation)
     }
 
     private fun handleEvidencesList(list: ArrayList<Uri>) = with(binding) {
@@ -67,6 +75,29 @@ class NewPostDialogFragment : CaptureImagesFragment() {
         }
     }
 
+    private fun handlePostLoading(show: Boolean) = with(binding) {
+        progress.isVisible = show
+    }
+
+    private fun handlePostCreationError(error: Exception) {
+        when (error) {
+            is StorageExceptions.UploadEvidencesError -> {
+                longToast(getString(R.string.ops_error_upload_images))
+            }
+
+            else -> {
+                longToast(getString(R.string.ops_error))
+            }
+        }
+    }
+
+    private fun handlePostCreation(isSuccessful: Boolean) {
+        if (isSuccessful) {
+            longToast(getString(R.string.success_post_complain))
+            dismiss()
+        }
+    }
+
     private fun setUpViews() = with(binding) {
         toolbarPost.apply {
             toolbarClose.setOnClickListener { dismiss() }
@@ -80,6 +111,10 @@ class NewPostDialogFragment : CaptureImagesFragment() {
             attachFile.mainContainer.setOnClickListener {
                 showImageSelector()
             }
+        }
+
+        complainDescription.doOnTextChanged { text, _, _, _ ->
+            newPostViewModel.saveComment(text.toString())
         }
     }
 

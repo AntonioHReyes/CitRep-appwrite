@@ -9,13 +9,15 @@ import com.tonyakitori.citrep.domain.utils.Response
 import com.tonyakitori.citrep.framework.services.FileManagementService
 import com.tonyakitori.citrep.framework.utils.createErrorLog
 import com.tonyakitori.citrep.framework.utils.createInfoLog
+import com.tonyakitori.citrep.usecases.SavePostInDBUseCase
 import com.tonyakitori.citrep.usecases.UploadEvidences
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class NewPostDialogViewModel(
     private val fileManagementService: FileManagementService,
-    private val uploadEvidences: UploadEvidences
+    private val uploadEvidences: UploadEvidences,
+    private val savePostInDBUseCase: SavePostInDBUseCase
 ) : ViewModel() {
 
     private val _evidenceList: MutableLiveData<ArrayList<Uri>> = MutableLiveData()
@@ -27,19 +29,28 @@ class NewPostDialogViewModel(
     private val _postLoading: MutableLiveData<Boolean> = MutableLiveData()
     val postLoading: LiveData<Boolean> get() = _postLoading
 
+    private val _postCreated: MutableLiveData<Boolean> = MutableLiveData()
+    val postCreated: LiveData<Boolean> get() = _postCreated
+
+    private val _comment: MutableLiveData<String> = MutableLiveData()
+
     private val _uploadEvidencesError: MutableLiveData<Exception> = MutableLiveData()
     private val _postComplainError: MutableLiveData<Exception> = MutableLiveData()
 
-    val mediatorLiveData: MediatorLiveData<Exception> = MediatorLiveData()
+    val postErrorMediatorLiveData: MediatorLiveData<Exception> = MediatorLiveData()
 
     init {
-        mediatorLiveData.addSource(_uploadEvidencesError) {
-            mediatorLiveData.postValue(it)
+        postErrorMediatorLiveData.addSource(_uploadEvidencesError) {
+            postErrorMediatorLiveData.postValue(it)
         }
 
-        mediatorLiveData.addSource(_postComplainError) {
-            mediatorLiveData.postValue(it)
+        postErrorMediatorLiveData.addSource(_postComplainError) {
+            postErrorMediatorLiveData.postValue(it)
         }
+    }
+
+    fun saveComment(comment: String) {
+        _comment.postValue(comment)
     }
 
     fun addEvidenceToList(bitmap: Bitmap? = null, uri: Uri? = null) {
@@ -101,7 +112,32 @@ class NewPostDialogViewModel(
     }
 
     private suspend fun postComplain(uploadEvidencesResult: Pair<ArrayList<FileId>, Int>? = null) {
-        uploadEvidencesResult?.first?.createInfoLog("IdsList")
+        viewModelScope.launch {
+            uploadEvidencesResult?.let { responseFiles ->
+                val (fileIds, errorFilesCount) = responseFiles
+                savePostComplain(fileIds)
+            } ?: run {
+                savePostComplain(listOf())
+            }
+        }
+    }
+
+    private suspend fun savePostComplain(fileIds: List<FileId>) {
+        savePostInDBUseCase(_comment.value ?: "", fileIds).collect { savedPostResponse ->
+            when (savedPostResponse) {
+                Response.Loading -> _postLoading.postValue(true)
+                is Response.Success -> {
+                    _postCreated.postValue(true)
+                    _postLoading.postValue(false)
+                }
+                is Response.Error -> {
+                    savedPostResponse.error.createErrorLog(ERROR_IN_SAVING_POST)
+                    _postLoading.postValue(false)
+                    _postComplainError.postValue(Exception(savedPostResponse.error))
+                    _postCreated.postValue(false)
+                }
+            }
+        }
     }
 
     enum class NewPostActions {
@@ -111,6 +147,7 @@ class NewPostDialogViewModel(
     companion object {
         const val TAG = "NewPostDialogViewModel"
         const val ERROR_UPLOADING_EVIDENCES = "ErrorInUpload"
+        const val ERROR_IN_SAVING_POST = "ErrorSavingPost"
     }
 
 }

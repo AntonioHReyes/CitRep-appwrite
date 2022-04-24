@@ -28,4 +28,6 @@
     <string name="give_persmissions">Es necesario conceder los permisos para continuar.</string>
     <string name="error_get_image">Ha ocurrido un error en la selección de tu imagen</string>
     <string name="max_evidences_loaded">Has alcanzado el maximo de evidencias</string>
+    <string name="ops_error_upload_images">Ops! Ocurrio un error, No fue posible cargar tus imagenes...</string>
+    <string name="success_post_complain">La publicación se realizo exitosamente</string>
 </resources>

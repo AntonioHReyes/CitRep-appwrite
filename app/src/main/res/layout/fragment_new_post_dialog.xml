@@ -7,9 +7,10 @@
     tools:context=".framework.ui.screens.post.NewPostDialogFragment">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="350dp"
-        android:layout_height="450dp"
-        android:padding="@dimen/spacing_10"
+        android:layout_width="@dimen/width_new_post_dialog"
+        android:layout_height="wrap_content"
+        android:maxHeight="@dimen/height_new_post_dialog"
+        android:paddingHorizontal="@dimen/spacing_10"
         app:cardCornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,6 +20,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:paddingBottom="@dimen/spacing_20"
             android:orientation="vertical">
 
             <include
@@ -32,6 +34,7 @@
                 android:orientation="vertical">
 
                 <EditText
+                    android:id="@+id/complain_description"
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
                     android:layout_marginVertical="@dimen/spacing_10"
@@ -52,5 +55,16 @@
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -34,6 +34,7 @@ class AccountAppWrite(private val appWriteClient: Client) : AccountDataSource {
         val response = account.get()
 
         return AccountEntity(
+            userId = response.id,
             name = response.name,
             isVerified = response.emailVerification
         )

@@ -23,4 +23,6 @@
     <dimen name="spacing_15">15dp</dimen>
     <dimen name="image_file_attachment_size">40dp</dimen>
     <dimen name="image_file_size">55dp</dimen>
+    <dimen name="width_new_post_dialog">350dp</dimen>
+    <dimen name="height_new_post_dialog">450dp</dimen>
 </resources>

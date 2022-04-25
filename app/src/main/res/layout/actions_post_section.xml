@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:baselineAligned="false"
+    android:orientation="horizontal"
+    android:padding="@dimen/spacing_10">
+
+    <LinearLayout
+        android:id="@+id/emotion_action"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="?attr/selectableItemBackground"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/icon_action_size"
+            android:layout_height="@dimen/icon_action_size"
+            android:contentDescription="@string/like_icon_content_description"
+            android:padding="@dimen/spacing_2"
+            android:src="@drawable/ic_baseline_thumb_up_24" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/spacing_2"
+            android:text="@string/like"
+            android:textSize="@dimen/small_text_size" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/comment_action"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="?attr/selectableItemBackground"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/icon_action_size"
+            android:layout_height="@dimen/icon_action_size"
+            android:contentDescription="@string/comment_icon_content_description"
+            android:padding="@dimen/spacing_2"
+            android:src="@drawable/ic_baseline_comment_24" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/spacing_2"
+            android:text="@string/comments"
+            android:textSize="@dimen/small_text_size" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/share_action"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="?attr/selectableItemBackground"
+        android:gravity="center_vertical|end"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/icon_action_size"
+            android:layout_height="@dimen/icon_action_size"
+            android:contentDescription="@string/share_icon_content_description"
+            android:padding="@dimen/spacing_2"
+            android:src="@drawable/ic_baseline_share_24" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/spacing_2"
+            android:text="@string/share"
+            android:textSize="@dimen/small_text_size" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

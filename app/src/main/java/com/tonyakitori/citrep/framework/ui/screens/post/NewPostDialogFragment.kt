@@ -12,6 +12,7 @@ import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import com.tonyakitori.citrep.R
 import com.tonyakitori.citrep.databinding.FragmentNewPostDialogBinding
+import com.tonyakitori.citrep.domain.exceptions.PostExceptions
 import com.tonyakitori.citrep.domain.exceptions.StorageExceptions
 import com.tonyakitori.citrep.framework.ui.adapters.PostEvidenceAdapter
 import com.tonyakitori.citrep.framework.ui.helpers.CaptureImagesFragment
@@ -83,6 +84,10 @@ class NewPostDialogFragment : CaptureImagesFragment() {
         when (error) {
             is StorageExceptions.UploadEvidencesError -> {
                 longToast(getString(R.string.ops_error_upload_images))
+            }
+
+            is PostExceptions.PostEmpty -> {
+                longToast(getString(R.string.post_empty))
             }
 
             else -> {

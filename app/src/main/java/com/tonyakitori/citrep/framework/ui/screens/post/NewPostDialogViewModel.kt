@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import android.net.Uri
 import androidx.lifecycle.*
 import com.tonyakitori.citrep.data.source.remote.FileId
+import com.tonyakitori.citrep.domain.exceptions.PostExceptions
 import com.tonyakitori.citrep.domain.exceptions.StorageExceptions
 import com.tonyakitori.citrep.domain.utils.Response
 import com.tonyakitori.citrep.framework.services.FileManagementService
@@ -86,6 +87,11 @@ class NewPostDialogViewModel(
 
     fun startPostComplain() {
         viewModelScope.launch {
+            if (_comment.value?.isEmpty() == true && _evidenceList.value?.isNullOrEmpty() == true) {
+                _postComplainError.postValue(PostExceptions.PostEmpty())
+                return@launch
+            }
+
             val evidencesList = _evidenceList.value ?: arrayListOf()
             if (evidencesList.isNotEmpty()) {
                 "Start evidences upload".createInfoLog(TAG)

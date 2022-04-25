@@ -8,4 +8,6 @@ interface StorageDataSource {
 
     suspend fun uploadImage(uri: Uri): FileId
 
+    suspend fun getImageForView(fileId: FileId): ByteArray
+
 }

@@ -8,4 +8,6 @@ interface PostCollectionDataSource {
 
     suspend fun savePost(postEntity: PostEntity): DocumentId
 
+    suspend fun getSavedPosts(): List<PostEntity>
+
 }

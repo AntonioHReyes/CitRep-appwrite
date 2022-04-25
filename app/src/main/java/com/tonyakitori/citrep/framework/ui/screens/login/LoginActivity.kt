@@ -7,6 +7,7 @@ import androidx.core.view.isVisible
 import com.tonyakitori.citrep.R
 import com.tonyakitori.citrep.databinding.ActivityLoginBinding
 import com.tonyakitori.citrep.domain.entities.AccountEntity
+import com.tonyakitori.citrep.domain.exceptions.AccountExceptions
 import com.tonyakitori.citrep.framework.ui.screens.main.HomeActivity
 import com.tonyakitori.citrep.framework.ui.screens.signup.SignUpActivity
 import com.tonyakitori.citrep.framework.utils.longToast
@@ -32,11 +33,19 @@ class LoginActivity : AppCompatActivity() {
 
         loginVm.accountSessionLoading.observe(this, ::handleLoading)
         loginVm.accountSession.observe(this, ::handleAccountSessionCreation)
-        loginVm.error.observe(this) { longToast(getString(R.string.ops_error)) }
+        loginVm.error.observe(this, ::handleError)
     }
 
     private fun handleLoading(show: Boolean) {
         binding.progress.isVisible = show
+    }
+
+    private fun handleError(error: Exception) = when (error) {
+        is AccountExceptions.TooManyRequests -> {
+            longToast(getString(R.string.too_many_requests))
+        }
+
+        else -> longToast(getString(R.string.ops_error))
     }
 
     private fun handleAccountSessionCreation(account: AccountEntity?) {

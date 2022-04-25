@@ -25,7 +25,7 @@ val mainModule = module {
     factory<AccountRepository> { AccountRepositoryImpl(get()) }
     factory<AvatarRepository> { AvatarRepositoryImpl(get()) }
     factory<StorageRepository> { StorageRepositoryImpl(get()) }
-    factory<PostCollectionRepository> { PostCollectionRepositoryImpl(get()) }
+    factory<PostCollectionRepository> { PostCollectionRepositoryImpl(get(), get(), get()) }
 
     //useCases
     factory { CreateAccountUseCase(get()) }
@@ -34,12 +34,13 @@ val mainModule = module {
     factory { GetAccountUseCase(get()) }
     factory { UploadEvidences(get()) }
     factory { SavePostInDBUseCase(get(), get()) }
+    factory { GetSavedPostsUseCase(get()) }
 
     //ViewModels
     viewModel { LoginViewModel(get()) }
     viewModel { SignUpViewModel(get()) }
     viewModel { ProfileViewModel(get(), get()) }
-    viewModel { HomeViewModel(get()) }
+    viewModel { HomeViewModel(get(), get()) }
     viewModel { NewPostDialogViewModel(get(named(FILES)), get(), get()) }
 }
 

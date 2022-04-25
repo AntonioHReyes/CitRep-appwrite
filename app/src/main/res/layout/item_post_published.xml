@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/spacing_5"
+    android:background="@drawable/bg_rounded_corners"
+    android:paddingHorizontal="@dimen/spacing_10"
+    android:paddingVertical="@dimen/spacing_20">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/avatar_image"
+        android:layout_width="@dimen/image_small_size"
+        android:layout_height="@dimen/image_small_size"
+        android:src="@drawable/ic_baseline_account_circle_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/profile_name"
+        style="@style/ProfilePostItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_20"
+        app:layout_constraintStart_toEndOf="@id/avatar_image"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Antonio Huerta Reyes" />
+
+    <TextView
+        android:id="@+id/post_date"
+        style="@style/ProfilePostItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/small_text_size"
+        app:layout_constraintStart_toStartOf="@id/profile_name"
+        app:layout_constraintTop_toBottomOf="@id/profile_name"
+        tools:text="12/02/1997" />
+
+
+    <TextView
+        android:id="@+id/post_description"
+        style="@style/ProfilePostItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_20"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/post_date"
+        tools:text="Esta seria la descripción del post simple" />
+
+
+    <FrameLayout
+        android:id="@+id/gallery_images"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/evidences_height"
+        android:layout_marginTop="@dimen/spacing_10"
+        android:paddingVertical="@dimen/spacing_5"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/post_description">
+
+        <include
+            android:id="@+id/gallery_images_layout"
+            layout="@layout/item_gallery_files" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/gallery_images">
+
+        <include
+            android:id="@+id/actions"
+            layout="@layout/actions_post_section" />
+
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

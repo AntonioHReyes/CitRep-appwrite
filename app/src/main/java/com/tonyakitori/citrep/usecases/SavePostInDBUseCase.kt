@@ -21,11 +21,15 @@ class SavePostInDBUseCase(
         emit(Response.Loading)
 
         var userId = ""
+        var userName = ""
 
         accountRepository.getAccount().collect {
             when (it) {
                 is Response.Error -> throw PostExceptions.UserNotFound()
-                is Response.Success -> userId = it.data.userId
+                is Response.Success -> {
+                    userId = it.data.userId
+                    userName = it.data.name
+                }
                 else -> {}
             }
         }
@@ -37,6 +41,7 @@ class SavePostInDBUseCase(
 
         val postEntity = PostEntity(
             userId = userId,
+            userName = userName,
             comment = comment,
             image1FileId = getSecureIndex(0),
             image2FileId = getSecureIndex(1),

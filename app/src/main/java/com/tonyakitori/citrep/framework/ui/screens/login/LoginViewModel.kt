@@ -5,9 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tonyakitori.citrep.domain.entities.AccountEntity
+import com.tonyakitori.citrep.domain.exceptions.AccountExceptions
 import com.tonyakitori.citrep.domain.utils.Response
 import com.tonyakitori.citrep.framework.utils.createErrorLog
 import com.tonyakitori.citrep.usecases.CreateAccountSessionUseCase
+import io.appwrite.exceptions.AppwriteException
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -20,8 +22,8 @@ class LoginViewModel(private val createAccountSessionUseCase: CreateAccountSessi
     private val _accountSession: MutableLiveData<AccountEntity?> = MutableLiveData()
     val accountSession: LiveData<AccountEntity?> get() = _accountSession
 
-    private val _error: MutableLiveData<Unit> = MutableLiveData()
-    val error: LiveData<Unit> get() = _error
+    private val _error: MutableLiveData<Exception> = MutableLiveData()
+    val error: LiveData<Exception> get() = _error
 
     fun createAccountSession(accountEntity: AccountEntity) {
         viewModelScope.launch {
@@ -34,7 +36,7 @@ class LoginViewModel(private val createAccountSessionUseCase: CreateAccountSessi
                     }
                     is Response.Error -> {
                         it.error.createErrorLog(ACCOUNT_SESSION_ERROR)
-                        _error.postValue(Unit)
+                        _error.postValue(handleAccountSessionErrors(it.error))
                         _accountSessionLoading.postValue(false)
                     }
                 }
@@ -42,6 +44,18 @@ class LoginViewModel(private val createAccountSessionUseCase: CreateAccountSessi
         }
     }
 
+    private fun handleAccountSessionErrors(error: Throwable): Exception {
+        return when (error) {
+            is AppwriteException -> {
+                when (error.message) {
+                    "Too many requests" -> AccountExceptions.TooManyRequests(error.message)
+                    else -> Exception()
+                }
+            }
+
+            else -> Exception()
+        }
+    }
 
     companion object {
         const val ACCOUNT_SESSION_ERROR = "AccountSessionError"

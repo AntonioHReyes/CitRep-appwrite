@@ -22,5 +22,39 @@ class PostCollectionAppWrite(private val appWriteClient: Client) : PostCollectio
         return response.id
     }
 
+    override suspend fun getSavedPosts(): List<PostEntity> {
+        val database = Database(appWriteClient)
+
+        val response = database.listDocuments(
+            BuildConfig.POST_COLLECTION_ID
+        )
+
+        return response.convertTo { objectMapped ->
+            return@convertTo PostEntity(
+                id = objectMapped[ID] as DocumentId,
+                userId = objectMapped[USER_ID] as String,
+                userName = objectMapped[USER_NAME] as String,
+                comment = objectMapped[COMMENT] as String,
+                image1FileId = objectMapped[IMAGE1] as String,
+                image2FileId = objectMapped[IMAGE2] as String,
+                image3FileId = objectMapped[IMAGE3] as String,
+                enabled = objectMapped[ENABLED] as Boolean,
+                date = objectMapped[DATE] as Long,
+            )
+        }
+    }
+
+    companion object {
+        const val ID = "\$id"
+        const val USER_ID = "userId"
+        const val USER_NAME = "userName"
+        const val COMMENT = "comment"
+        const val IMAGE1 = "image1"
+        const val IMAGE2 = "image2"
+        const val IMAGE3 = "image3"
+        const val ENABLED = "enabled"
+        const val DATE = "date"
+    }
+
 
 }

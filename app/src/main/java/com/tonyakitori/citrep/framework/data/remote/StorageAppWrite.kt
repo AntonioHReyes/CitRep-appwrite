@@ -22,4 +22,14 @@ class StorageAppWrite(private val appWriteClient: Client) : StorageDataSource {
         return response.id
     }
 
+    override suspend fun getImageForView(fileId: FileId): ByteArray {
+
+        val storage = Storage(appWriteClient)
+
+        return storage.getFileView(
+            BuildConfig.BUCKET_COMPLAIN_ID,
+            fileId
+        )
+    }
+
 }

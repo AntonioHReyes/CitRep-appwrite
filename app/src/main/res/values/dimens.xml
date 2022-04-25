@@ -25,4 +25,7 @@
     <dimen name="image_file_size">55dp</dimen>
     <dimen name="width_new_post_dialog">350dp</dimen>
     <dimen name="height_new_post_dialog">450dp</dimen>
+    <dimen name="icon_action_size">30dp</dimen>
+    <dimen name="spacing_2">2dp</dimen>
+    <dimen name="evidences_height">300dp</dimen>
 </resources>

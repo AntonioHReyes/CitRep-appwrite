@@ -40,8 +40,8 @@ val mainModule = module {
     viewModel { LoginViewModel(get()) }
     viewModel { SignUpViewModel(get()) }
     viewModel { ProfileViewModel(get(), get()) }
-    viewModel { HomeViewModel(get(), get()) }
-    viewModel { NewPostDialogViewModel(get(named(FILES)), get(), get()) }
+    viewModel { HomeViewModel(get(), get(), get()) }
+    viewModel { NewPostDialogViewModel(get(named(FILES)), get(), get(), get()) }
 }
 
-val allModules = listOf(mainModule, appWriteModule, servicesModule)
+val allModules = listOf(mainModule, singletonObserversModule, appWriteModule, servicesModule)

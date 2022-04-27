@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.tonyakitori.citrep.di.NewPostObserver
 import com.tonyakitori.citrep.domain.entities.PostEntity
 import com.tonyakitori.citrep.domain.utils.Response
 import com.tonyakitori.citrep.framework.utils.createErrorLog
@@ -14,7 +15,8 @@ import kotlinx.coroutines.launch
 
 class HomeViewModel(
     private val getAvatarUseCase: GetAvatarUseCase,
-    private val getSavedPostsUseCase: GetSavedPostsUseCase
+    private val getSavedPostsUseCase: GetSavedPostsUseCase,
+    val newPostObserver: NewPostObserver
 ) : ViewModel() {
 
     private val _avatar: MutableLiveData<ByteArray?> = MutableLiveData()

@@ -30,7 +30,7 @@
     <string name="max_evidences_loaded">Has alcanzado el maximo de evidencias</string>
     <string name="ops_error_upload_images">Ops! Ocurrio un error. No fue posible cargar tus imagenes…</string>
     <string name="success_post_complain">La publicación se realizo exitosamente</string>
-    <string name="post_empty">Por favor llena tu post antes de continuar :\'(</string>
+    <string name="post_empty">Por favor llena la descripción de tu post antes de continuar :\'(</string>
     <string name="like">Me gusta</string>
     <string name="comments">Comentarios</string>
     <string name="share">Compartir</string>

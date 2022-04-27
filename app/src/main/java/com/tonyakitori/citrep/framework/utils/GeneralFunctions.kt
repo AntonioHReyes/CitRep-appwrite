@@ -31,7 +31,7 @@ fun Fragment.checkPermissions(list: List<String>, callback: ((Boolean) -> Unit) 
         }).check()
 }
 
-fun Long.getFormattedDate(onlyDate: Boolean = false): String {
+fun Long.getFormattedDate(onlyDate: Boolean = true): String {
     val messageTime = Calendar.getInstance()
     messageTime.minimalDaysInFirstWeek = 4
     messageTime.timeInMillis = this

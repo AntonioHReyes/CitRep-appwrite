@@ -68,6 +68,13 @@ class PostsAdapter(private val callback: () -> Unit) :
 
             galleryImagesLayout.apply {
                 val list = getImagesAsList(item)
+                image1.setImageBitmap(null)
+                image1.isVisible = false
+                image2.setImageBitmap(null)
+                image2.isVisible = false
+                image3.setImageBitmap(null)
+                image3.isVisible = false
+
                 list.forEachIndexed { index, image ->
                     when (index) {
                         0 -> {

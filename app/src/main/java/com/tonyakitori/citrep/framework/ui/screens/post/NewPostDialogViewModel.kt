@@ -4,6 +4,8 @@ import android.graphics.Bitmap
 import android.net.Uri
 import androidx.lifecycle.*
 import com.tonyakitori.citrep.data.source.remote.FileId
+import com.tonyakitori.citrep.di.NewPostObserver
+import com.tonyakitori.citrep.di.PublishedStatus
 import com.tonyakitori.citrep.domain.exceptions.PostExceptions
 import com.tonyakitori.citrep.domain.exceptions.StorageExceptions
 import com.tonyakitori.citrep.domain.utils.Response
@@ -18,7 +20,8 @@ import kotlinx.coroutines.launch
 class NewPostDialogViewModel(
     private val fileManagementService: FileManagementService,
     private val uploadEvidences: UploadEvidences,
-    private val savePostInDBUseCase: SavePostInDBUseCase
+    private val savePostInDBUseCase: SavePostInDBUseCase,
+    private val newPostObserver: NewPostObserver
 ) : ViewModel() {
 
     private val _evidenceList: MutableLiveData<ArrayList<Uri>> = MutableLiveData()
@@ -87,7 +90,7 @@ class NewPostDialogViewModel(
 
     fun startPostComplain() {
         viewModelScope.launch {
-            if (_comment.value?.isEmpty() == true && _evidenceList.value?.isNullOrEmpty() == true) {
+            if (_comment.value.isNullOrEmpty()) {
                 _postComplainError.postValue(PostExceptions.PostEmpty())
                 return@launch
             }
@@ -131,9 +134,13 @@ class NewPostDialogViewModel(
     private suspend fun savePostComplain(fileIds: List<FileId>) {
         savePostInDBUseCase(_comment.value ?: "", fileIds).collect { savedPostResponse ->
             when (savedPostResponse) {
-                Response.Loading -> _postLoading.postValue(true)
+                Response.Loading -> {
+                    _postLoading.postValue(true)
+                    newPostObserver.postValue(PublishedStatus.LOADING)
+                }
                 is Response.Success -> {
                     _postCreated.postValue(true)
+                    newPostObserver.postValue(PublishedStatus.PUBLISHED)
                     _postLoading.postValue(false)
                 }
                 is Response.Error -> {
@@ -141,6 +148,7 @@ class NewPostDialogViewModel(
                     _postLoading.postValue(false)
                     _postComplainError.postValue(Exception(savedPostResponse.error))
                     _postCreated.postValue(false)
+                    newPostObserver.postValue(PublishedStatus.ERROR)
                 }
             }
         }

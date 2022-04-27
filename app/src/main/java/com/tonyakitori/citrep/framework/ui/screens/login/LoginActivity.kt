@@ -52,6 +52,7 @@ class LoginActivity : AppCompatActivity() {
         val intent = Intent(this, HomeActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(intent)
+        finish()
     }
 
     private fun setUpViews() = with(binding) {
@@ -65,8 +66,8 @@ class LoginActivity : AppCompatActivity() {
         loginButton.setOnClickListener {
             loginVm.createAccountSession(
                 AccountEntity(
-                    email = edtEmail.text.toString(),
-                    password = edtPassword.text.toString()
+                    email = edtEmail.text.toString().trim(),
+                    password = edtPassword.text.toString().trim()
                 )
             )
         }

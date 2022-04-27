@@ -6,6 +6,7 @@ import com.tonyakitori.citrep.data.source.remote.PostCollectionDataSource
 import com.tonyakitori.citrep.domain.entities.PostEntity
 import com.tonyakitori.citrep.framework.domain.toPostAppWrite
 import io.appwrite.Client
+import io.appwrite.Query
 import io.appwrite.services.Database
 
 class PostCollectionAppWrite(private val appWriteClient: Client) : PostCollectionDataSource {
@@ -26,7 +27,16 @@ class PostCollectionAppWrite(private val appWriteClient: Client) : PostCollectio
         val database = Database(appWriteClient)
 
         val response = database.listDocuments(
-            BuildConfig.POST_COLLECTION_ID
+            BuildConfig.POST_COLLECTION_ID,
+            queries = listOf(
+                Query.equal("enabled", true)
+            ),
+            orderAttributes = listOf(
+                "date"
+            ),
+            orderTypes = listOf(
+                "DESC"
+            )
         )
 
         return response.convertTo { objectMapped ->

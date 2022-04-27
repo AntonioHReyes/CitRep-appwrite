@@ -17,8 +17,7 @@ class PostCollectionRepositoryImpl(
     private val postCollectionDataSource: PostCollectionDataSource,
     private val avatarDataSource: AvatarDataSource,
     private val storageDataSource: StorageDataSource
-) :
-    PostCollectionRepository {
+) : PostCollectionRepository {
 
     override suspend fun savePost(postEntity: PostEntity): DocumentId =
         postCollectionDataSource.savePost(postEntity)

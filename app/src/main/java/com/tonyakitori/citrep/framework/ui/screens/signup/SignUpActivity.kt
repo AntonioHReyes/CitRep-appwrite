@@ -69,9 +69,9 @@ class SignUpActivity : AppCompatActivity() {
 
         signUpViewModel.createAccount(
             AccountEntity(
-                email = edtEmail.text.toString(),
-                password = edtPassword.text.toString(),
-                name = edtName.text.toString()
+                email = edtEmail.text.toString().trim(),
+                password = edtPassword.text.toString().trim(),
+                name = edtName.text.toString().trim()
             )
         )
     }

@@ -1,8 +1,8 @@
 package com.tonyakitori.citrep.framework.data.remote
 
 import com.tonyakitori.citrep.BuildConfig
-import com.tonyakitori.citrep.data.source.remote.DocumentId
 import com.tonyakitori.citrep.data.source.remote.PostCollectionDataSource
+import com.tonyakitori.citrep.domain.entities.DocumentId
 import com.tonyakitori.citrep.domain.entities.PostEntity
 import com.tonyakitori.citrep.framework.domain.toPostAppWrite
 import io.appwrite.Client

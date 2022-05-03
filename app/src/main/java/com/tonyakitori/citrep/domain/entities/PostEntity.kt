@@ -1,7 +1,6 @@
 package com.tonyakitori.citrep.domain.entities
 
-import com.tonyakitori.citrep.data.source.remote.DocumentId
-import java.util.*
+import java.util.Date
 
 data class PostEntity(
     val id: DocumentId? = null,

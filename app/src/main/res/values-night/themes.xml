@@ -35,4 +35,22 @@
         <item name="android:textSize">@dimen/medium_text_size</item>
     </style>
 
+    <style name="NotificationTitleItem" parent="Theme.CitRep">
+        <item name="android:textSize">@dimen/medium_text_size</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="NotificationMessageItem" parent="NotificationTitleItem">
+        <item name="android:textSize">@dimen/small_text_size</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="NotificationDateItem" parent="NotificationTitleItem">
+        <item name="android:textSize">@dimen/small_text_size</item>
+        <item name="android:textAlignment">textEnd</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
 </resources>

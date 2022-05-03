@@ -2,9 +2,9 @@ package com.tonyakitori.citrep.data.repositories.impl
 
 import com.tonyakitori.citrep.data.repositories.PostCollectionRepository
 import com.tonyakitori.citrep.data.source.remote.AvatarDataSource
-import com.tonyakitori.citrep.data.source.remote.DocumentId
 import com.tonyakitori.citrep.data.source.remote.PostCollectionDataSource
 import com.tonyakitori.citrep.data.source.remote.StorageDataSource
+import com.tonyakitori.citrep.domain.entities.DocumentId
 import com.tonyakitori.citrep.domain.entities.PostEntity
 import com.tonyakitori.citrep.domain.entities.UserPostEntity
 import com.tonyakitori.citrep.domain.utils.Response

@@ -1,5 +1,6 @@
 package com.tonyakitori.citrep.framework.data.remote
 
+import com.tonyakitori.citrep.BuildConfig
 import com.tonyakitori.citrep.data.source.remote.AccountDataSource
 import com.tonyakitori.citrep.domain.entities.AccountEntity
 import com.tonyakitori.citrep.framework.utils.createInfoLog
@@ -49,7 +50,7 @@ class AccountAppWrite(private val appWriteClient: Client) : AccountDataSource {
     override suspend fun createEmailVerification(): Token {
         val account = Account(appWriteClient)
 
-        return account.createVerification(url = "http://192.168.1.72")
+        return account.createVerification(url = BuildConfig.APP_VERIFICATION_URL)
     }
 
 }

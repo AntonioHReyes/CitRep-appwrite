@@ -4,7 +4,9 @@ import com.tonyakitori.citrep.data.repositories.AccountRepository
 import com.tonyakitori.citrep.data.source.remote.AccountDataSource
 import com.tonyakitori.citrep.domain.entities.AccountEntity
 import com.tonyakitori.citrep.domain.utils.Response
+import io.appwrite.models.Token
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
@@ -27,10 +29,25 @@ class AccountRepositoryImpl(private val accountDataSource: AccountDataSource) : 
         emit(Response.Error(error))
     }.flowOn(Dispatchers.IO)
 
+    override suspend fun deleteAccountSession() = flow {
+        emit(Response.Loading)
+        accountDataSource.deleteAccountSession()
+        emit(Response.Success(true))
+    }.catch { error ->
+        emit(Response.Error(error))
+    }.flowOn(Dispatchers.IO)
+
     override suspend fun getAccount() = flow {
         emit(Response.Loading)
         val account = accountDataSource.getAccount()
         emit(Response.Success(account))
+    }.catch { error ->
+        emit(Response.Error(error))
+    }.flowOn(Dispatchers.IO)
+
+    override suspend fun createEmailVerification(): Flow<Response<Token>> = flow {
+        emit(Response.Loading)
+        emit(Response.Success(accountDataSource.createEmailVerification()))
     }.catch { error ->
         emit(Response.Error(error))
     }.flowOn(Dispatchers.IO)

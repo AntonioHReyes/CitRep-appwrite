@@ -27,6 +27,7 @@ android {
             buildConfigField "String", "POST_COLLECTION_ID", "\"626585c53437e560f762\""
             buildConfigField "String", "NOTIFICATIONS_COLLECTION_ID", "\"626d795d27a16277bd76\""
             buildConfigField "String", "BUCKET_COMPLAIN_ID", "\"62603496490a2c9d222b\""
+            buildConfigField "String", "APP_VERIFICATION_URL", "\"http://citrep.com\""
         }
 
         debug {
@@ -37,6 +38,7 @@ android {
             buildConfigField "String", "POST_COLLECTION_ID", "\"626585c53437e560f762\""
             buildConfigField "String", "NOTIFICATIONS_COLLECTION_ID", "\"626d795d27a16277bd76\""
             buildConfigField "String", "BUCKET_COMPLAIN_ID", "\"62603496490a2c9d222b\""
+            buildConfigField "String", "APP_VERIFICATION_URL", "\"http://citrep.com\""
         }
     }
 

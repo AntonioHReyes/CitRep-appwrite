@@ -7,14 +7,19 @@ import androidx.lifecycle.viewModelScope
 import com.tonyakitori.citrep.domain.entities.AccountEntity
 import com.tonyakitori.citrep.domain.utils.Response
 import com.tonyakitori.citrep.framework.utils.createErrorLog
+import com.tonyakitori.citrep.usecases.CreateEmailVerificationUseCase
 import com.tonyakitori.citrep.usecases.GetAccountUseCase
 import com.tonyakitori.citrep.usecases.GetAvatarUseCase
+import com.tonyakitori.citrep.usecases.LogOutUseCase
+import io.appwrite.models.Token
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class ProfileViewModel(
     private val getAvatarUseCase: GetAvatarUseCase,
-    private val getAccountUseCase: GetAccountUseCase
+    private val getAccountUseCase: GetAccountUseCase,
+    private val createEmailVerificationUseCase: CreateEmailVerificationUseCase,
+    private val logOutUseCase: LogOutUseCase
 ) : ViewModel() {
 
     private val _avatarUrl: MutableLiveData<ByteArray?> = MutableLiveData()
@@ -29,6 +34,15 @@ class ProfileViewModel(
     val accountData: LiveData<AccountEntity?> get() = _accountData
 
     private val _accountError: MutableLiveData<Unit> = MutableLiveData()
+
+    private val _emailVerification: MutableLiveData<Token?> = MutableLiveData()
+    val emailVerification: LiveData<Token?> get() = _emailVerification
+
+    private val _emailVerificationError: MutableLiveData<Unit> = MutableLiveData()
+    val emailVerificationError: LiveData<Unit> get() = _emailVerificationError
+
+    private val _emailVerificationLoading: MutableLiveData<Boolean> = MutableLiveData()
+    val emailVerificationLoading: LiveData<Boolean> get() = _emailVerificationLoading
 
     init {
         getAvatarUrl()
@@ -71,10 +85,35 @@ class ProfileViewModel(
         }
     }
 
+    fun createEmailVerification() {
+        viewModelScope.launch {
+            createEmailVerificationUseCase().collect {
+                when (it) {
+                    Response.Loading -> _emailVerificationLoading.postValue(true)
+                    is Response.Success -> {
+                        _emailVerification.postValue(it.data)
+                        _emailVerificationLoading.postValue(false)
+                    }
+                    is Response.Error -> {
+                        it.error.createErrorLog(CREATE_EMAIL_VERIFICATION_ERROR)
+                        _emailVerificationError.postValue(Unit)
+                        _emailVerificationLoading.postValue(false)
+                    }
+                }
+            }
+        }
+    }
+
+    fun logOut() {
+        viewModelScope.launch {
+            logOutUseCase()
+        }
+    }
 
     companion object {
         const val GET_AVATAR_URL_ERROR = "GetAvatarError"
         const val GET_ACCOUNT_ERROR = "GetAccountError"
+        const val CREATE_EMAIL_VERIFICATION_ERROR = "CreateEmailVerificationErr"
     }
 
 }

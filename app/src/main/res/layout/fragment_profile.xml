@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".framework.ui.screens.main.fragments.profile.ProfileFragment">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/profile_header"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -19,61 +19,133 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_weight="1">
 
-        <RelativeLayout
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_avatar"
             android:layout_width="@dimen/image_normal_size"
-            android:layout_height="@dimen/image_normal_size">
+            android:layout_height="@dimen/image_normal_size"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/profile_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_baseline_account_circle_24"
+            tools:visibility="visible" />
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profile_avatar"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="gone"
-                tools:src="@drawable/ic_baseline_account_circle_24"
-                tools:visibility="visible" />
+        <ImageView
+            android:id="@+id/profile_verified"
+            android:layout_width="@dimen/verified_icon_size"
+            android:layout_height="@dimen/verified_icon_size"
+            android:layout_centerInParent="true"
+            android:contentDescription="@string/verified_check_content_description"
+            android:src="@drawable/ic_baseline_check_circle_24"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/profile_avatar"
+            app:layout_constraintEnd_toEndOf="@id/profile_avatar"
+            tools:visibility="visible" />
 
-            <ImageView
-                android:id="@+id/profile_verified"
-                android:layout_width="@dimen/verified_icon_size"
-                android:layout_height="@dimen/verified_icon_size"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:contentDescription="@string/verified_check_content_description"
-                android:src="@drawable/ic_baseline_check_circle_24"
-                android:visibility="gone"
-                tools:visibility="visible" />
+        <TextView
+            android:id="@+id/profile_status"
+            style="@style/ProfileHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/small_text_size"
+            app:layout_constraintEnd_toEndOf="@id/profile_verified"
+            app:layout_constraintStart_toStartOf="@id/profile_verified"
+            app:layout_constraintTop_toBottomOf="@id/profile_verified"
+            tools:text="Verificado" />
 
 
-            <ProgressBar
-                android:id="@+id/avatar_progress"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true" />
-
-        </RelativeLayout>
+        <ProgressBar
+            android:id="@+id/avatar_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/profile_name"
             style="@style/ProfileHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingVertical="@dimen/spacing_20"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/profile_avatar"
             tools:text="Antonio Huerta Reyes" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:id="@+id/profile_options"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
+        android:paddingHorizontal="@dimen/spacing_15"
+        android:paddingVertical="@dimen/spacing_15"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/profile_header"
         app:layout_constraintVertical_weight="2">
 
+        <TextView
+            android:id="@+id/verify_account_item"
+            style="@style/ProfileAccountItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:drawablePadding="@dimen/spacing_10"
+            android:paddingVertical="@dimen/spacing_15"
+            android:text="@string/verify_account"
+            app:drawableStartCompat="@drawable/ic_baseline_account_circle_24" />
+
+        <TextView
+            android:id="@+id/settings_account_item"
+            style="@style/ProfileAccountItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:drawablePadding="@dimen/spacing_10"
+            android:paddingVertical="@dimen/spacing_15"
+            android:text="@string/settings"
+            app:drawableStartCompat="@drawable/ic_baseline_settings_24" />
+
+        <TextView
+            android:id="@+id/policy_account_item"
+            style="@style/ProfileAccountItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:drawablePadding="@dimen/spacing_10"
+            android:paddingVertical="@dimen/spacing_15"
+            android:text="@string/terms_and_conditions"
+            app:drawableStartCompat="@drawable/ic_baseline_security_24" />
+
+        <TextView
+            android:id="@+id/account_log_out"
+            style="@style/ProfileAccountItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:drawablePadding="@dimen/spacing_10"
+            android:paddingVertical="@dimen/spacing_15"
+            android:text="@string/log_out"
+            app:drawableStartCompat="@drawable/ic_baseline_logout_24" />
 
     </LinearLayout>
 
+    <ProgressBar
+        android:id="@+id/general_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -40,4 +40,13 @@
     <string name="evidence">evidence</string>
     <string name="not_implemented">Lo sentimos por ahora esta funcionalidad no esta disponible</string>
     <string name="too_many_requests">Has realizado demasiados intentos, intentalo de nuevo más tarde</string>
+
+
+    <string name="filter_view_citrep">CitRep</string>
+    <string name="verified">Verificado</string>
+    <string name="with_out_verified">Sin verificar</string>
+    <string name="verify_account">Verificar cuenta</string>
+    <string name="settings">Ajustes</string>
+    <string name="terms_and_conditions">Terminos y condiciones</string>
+    <string name="log_out">Cerrar sesión</string>
 </resources>

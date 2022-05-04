@@ -19,10 +19,12 @@ import com.tonyakitori.citrep.framework.ui.screens.post.NewPostDialogViewModel
 import com.tonyakitori.citrep.framework.ui.screens.signup.SignUpViewModel
 import com.tonyakitori.citrep.usecases.CreateAccountSessionUseCase
 import com.tonyakitori.citrep.usecases.CreateAccountUseCase
+import com.tonyakitori.citrep.usecases.CreateEmailVerificationUseCase
 import com.tonyakitori.citrep.usecases.GetAccountUseCase
 import com.tonyakitori.citrep.usecases.GetAvatarUseCase
 import com.tonyakitori.citrep.usecases.GetNotificationsInRealTimeUseCase
 import com.tonyakitori.citrep.usecases.GetSavedPostsUseCase
+import com.tonyakitori.citrep.usecases.LogOutUseCase
 import com.tonyakitori.citrep.usecases.SavePostInDBUseCase
 import com.tonyakitori.citrep.usecases.UploadEvidences
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -47,11 +49,13 @@ val mainModule = module {
     factory { SavePostInDBUseCase(get(), get()) }
     factory { GetSavedPostsUseCase(get()) }
     factory { GetNotificationsInRealTimeUseCase(get()) }
+    factory { CreateEmailVerificationUseCase(get()) }
+    factory { LogOutUseCase(get()) }
 
     //ViewModels
     viewModel { LoginViewModel(get()) }
     viewModel { SignUpViewModel(get()) }
-    viewModel { ProfileViewModel(get(), get()) }
+    viewModel { ProfileViewModel(get(), get(), get(), get()) }
     viewModel { HomeViewModel(get(), get(), get()) }
     viewModel { NewPostDialogViewModel(get(named(FILES)), get(), get(), get()) }
     viewModel { NotificationsViewModel(get()) }

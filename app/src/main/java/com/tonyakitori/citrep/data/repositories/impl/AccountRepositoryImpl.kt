@@ -4,7 +4,6 @@ import com.tonyakitori.citrep.data.repositories.AccountRepository
 import com.tonyakitori.citrep.data.source.remote.AccountDataSource
 import com.tonyakitori.citrep.domain.entities.AccountEntity
 import com.tonyakitori.citrep.domain.utils.Response
-import io.appwrite.models.Token
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
@@ -45,9 +44,19 @@ class AccountRepositoryImpl(private val accountDataSource: AccountDataSource) : 
         emit(Response.Error(error))
     }.flowOn(Dispatchers.IO)
 
-    override suspend fun createEmailVerification(): Flow<Response<Token>> = flow {
+    override suspend fun createEmailVerification(): Flow<Response<String>> = flow {
         emit(Response.Loading)
         emit(Response.Success(accountDataSource.createEmailVerification()))
+    }.catch { error ->
+        emit(Response.Error(error))
+    }.flowOn(Dispatchers.IO)
+
+    override suspend fun confirmEmailVerification(
+        userId: String,
+        secret: String
+    ): Flow<Response<String>> = flow {
+        emit(Response.Loading)
+        emit(Response.Success(accountDataSource.confirmEmailVerification(userId, secret)))
     }.catch { error ->
         emit(Response.Error(error))
     }.flowOn(Dispatchers.IO)

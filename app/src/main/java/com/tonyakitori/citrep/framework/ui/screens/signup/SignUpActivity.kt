@@ -39,6 +39,7 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun handleSuccess(accountEntity: AccountEntity?) {
+        longToast(getString(R.string.success_signup))
         val intent = Intent(this, LoginActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(intent)

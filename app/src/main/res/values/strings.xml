@@ -49,4 +49,8 @@
     <string name="settings">Ajustes</string>
     <string name="terms_and_conditions">Terminos y condiciones</string>
     <string name="log_out">Cerrar sesión</string>
+    <string name="success_signup">¡La creación de tu usuario ha sido exitosa!</string>
+    <string name="expired_deep_link">El enlace ha caducado por favor intentalo de nuevo...</string>
+    <string name="email_verification_send_success">Hemos enviado un email a tu correo para continuar con la verificación</string>
+    <string name="invalid_credentials_error">Credenciales invalidas, revisa tu usuario y contraseña</string>
 </resources>

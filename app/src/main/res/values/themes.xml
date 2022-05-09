@@ -57,4 +57,21 @@
         <item name="android:textStyle">normal</item>
     </style>
 
+    <style name="CustomDialogTheme" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="DialogTitle" parent="Theme.CitRep">
+        <item name="android:textSize">@dimen/medium_text_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">?attr/colorOnSecondary</item>
+    </style>
+
+    <style name="DialogContent" parent="Theme.CitRep">
+        <item name="android:textSize">@dimen/regular_text_size</item>
+        <item name="android:textColor">?attr/colorOnSecondary</item>
+    </style>
+
 </resources>

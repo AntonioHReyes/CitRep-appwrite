@@ -19,9 +19,20 @@
         tools:layout="@layout/fragment_notifications" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_profile"
         android:name="com.tonyakitori.citrep.framework.ui.screens.main.fragments.profile.ProfileFragment"
         android:label="@string/title_account"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile">
+        <argument
+            android:name="userId"
+            android:defaultValue=""
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="secret"
+            android:defaultValue=""
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
 
 </navigation>

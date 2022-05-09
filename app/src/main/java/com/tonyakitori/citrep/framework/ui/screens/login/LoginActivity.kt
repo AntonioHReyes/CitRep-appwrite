@@ -8,6 +8,7 @@ import com.tonyakitori.citrep.R
 import com.tonyakitori.citrep.databinding.ActivityLoginBinding
 import com.tonyakitori.citrep.domain.entities.AccountEntity
 import com.tonyakitori.citrep.domain.exceptions.AccountExceptions
+import com.tonyakitori.citrep.domain.exceptions.LoginExceptions
 import com.tonyakitori.citrep.framework.ui.screens.main.HomeActivity
 import com.tonyakitori.citrep.framework.ui.screens.signup.SignUpActivity
 import com.tonyakitori.citrep.framework.utils.longToast
@@ -43,6 +44,10 @@ class LoginActivity : AppCompatActivity() {
     private fun handleError(error: Exception) = when (error) {
         is AccountExceptions.TooManyRequests -> {
             longToast(getString(R.string.too_many_requests))
+        }
+
+        is LoginExceptions.InvalidCredentials -> {
+            longToast(getString(R.string.invalid_credentials_error))
         }
 
         else -> longToast(getString(R.string.ops_error))

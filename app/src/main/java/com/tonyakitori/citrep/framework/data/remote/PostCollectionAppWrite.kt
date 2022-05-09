@@ -11,8 +11,9 @@ import io.appwrite.services.Database
 
 class PostCollectionAppWrite(private val appWriteClient: Client) : PostCollectionDataSource {
 
+    private val database by lazy { Database(appWriteClient) }
+
     override suspend fun savePost(postEntity: PostEntity): DocumentId {
-        val database = Database(appWriteClient)
 
         val response = database.createDocument(
             BuildConfig.POST_COLLECTION_ID,
@@ -24,7 +25,6 @@ class PostCollectionAppWrite(private val appWriteClient: Client) : PostCollectio
     }
 
     override suspend fun getSavedPosts(): List<PostEntity> {
-        val database = Database(appWriteClient)
 
         val response = database.listDocuments(
             BuildConfig.POST_COLLECTION_ID,

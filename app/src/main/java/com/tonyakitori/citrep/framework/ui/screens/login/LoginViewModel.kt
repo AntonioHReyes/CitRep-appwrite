@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tonyakitori.citrep.domain.entities.AccountEntity
 import com.tonyakitori.citrep.domain.exceptions.AccountExceptions
+import com.tonyakitori.citrep.domain.exceptions.LoginExceptions
 import com.tonyakitori.citrep.domain.utils.Response
 import com.tonyakitori.citrep.framework.utils.createErrorLog
 import com.tonyakitori.citrep.usecases.CreateAccountSessionUseCase
@@ -49,6 +50,7 @@ class LoginViewModel(private val createAccountSessionUseCase: CreateAccountSessi
             is AppwriteException -> {
                 when (error.message) {
                     "Too many requests" -> AccountExceptions.TooManyRequests(error.message)
+                    "Invalid credentials" -> LoginExceptions.InvalidCredentials(error.message)
                     else -> Exception()
                 }
             }

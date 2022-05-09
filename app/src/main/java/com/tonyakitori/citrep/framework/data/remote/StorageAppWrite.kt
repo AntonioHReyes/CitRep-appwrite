@@ -10,8 +10,10 @@ import io.appwrite.services.Storage
 
 class StorageAppWrite(private val appWriteClient: Client) : StorageDataSource {
 
+    private val storage by lazy { Storage(appWriteClient) }
+
+
     override suspend fun uploadImage(uri: Uri): FileId {
-        val storage = Storage(appWriteClient)
 
         val response = storage.createFile(
             bucketId = BuildConfig.BUCKET_COMPLAIN_ID,
@@ -23,8 +25,6 @@ class StorageAppWrite(private val appWriteClient: Client) : StorageDataSource {
     }
 
     override suspend fun getImageForView(fileId: FileId): ByteArray {
-
-        val storage = Storage(appWriteClient)
 
         return storage.getFileView(
             BuildConfig.BUCKET_COMPLAIN_ID,

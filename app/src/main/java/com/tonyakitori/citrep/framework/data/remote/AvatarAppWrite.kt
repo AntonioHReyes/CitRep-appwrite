@@ -6,8 +6,9 @@ import io.appwrite.services.Avatars
 
 class AvatarAppWrite(private val appWriteClient: Client) : AvatarDataSource {
 
+    private val avatars by lazy { Avatars(appWriteClient) }
+
     override suspend fun getAvatarName(name: String?): ByteArray {
-        val avatars = Avatars(appWriteClient)
 
         return avatars.getInitials(name)
     }

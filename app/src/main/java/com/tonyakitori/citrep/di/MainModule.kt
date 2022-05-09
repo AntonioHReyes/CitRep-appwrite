@@ -17,6 +17,7 @@ import com.tonyakitori.citrep.framework.ui.screens.main.fragments.notifications.
 import com.tonyakitori.citrep.framework.ui.screens.main.fragments.profile.ProfileViewModel
 import com.tonyakitori.citrep.framework.ui.screens.post.NewPostDialogViewModel
 import com.tonyakitori.citrep.framework.ui.screens.signup.SignUpViewModel
+import com.tonyakitori.citrep.usecases.ConfirmEmailVerificationUseCase
 import com.tonyakitori.citrep.usecases.CreateAccountSessionUseCase
 import com.tonyakitori.citrep.usecases.CreateAccountUseCase
 import com.tonyakitori.citrep.usecases.CreateEmailVerificationUseCase
@@ -51,11 +52,12 @@ val mainModule = module {
     factory { GetNotificationsInRealTimeUseCase(get()) }
     factory { CreateEmailVerificationUseCase(get()) }
     factory { LogOutUseCase(get()) }
+    factory { ConfirmEmailVerificationUseCase(get()) }
 
     //ViewModels
     viewModel { LoginViewModel(get()) }
     viewModel { SignUpViewModel(get()) }
-    viewModel { ProfileViewModel(get(), get(), get(), get()) }
+    viewModel { ProfileViewModel(get(), get(), get(), get(), get()) }
     viewModel { HomeViewModel(get(), get(), get()) }
     viewModel { NewPostDialogViewModel(get(named(FILES)), get(), get(), get()) }
     viewModel { NotificationsViewModel(get()) }

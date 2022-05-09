@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'androidx.navigation.safeargs.kotlin'
+
 }
 
 android {
@@ -22,7 +24,7 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 
-            buildConfigField "String", "APPWRITE_ENDPOINT", "\"http://192.168.1.72:80/v1\""
+            buildConfigField "String", "APPWRITE_ENDPOINT", "\"http://192.168.1.67:80/v1\""
             buildConfigField "String", "PROJECT_ID", "\"625e196b3e214519df72\""
             buildConfigField "String", "POST_COLLECTION_ID", "\"626585c53437e560f762\""
             buildConfigField "String", "NOTIFICATIONS_COLLECTION_ID", "\"626d795d27a16277bd76\""
@@ -33,7 +35,7 @@ android {
         debug {
             debuggable true
 
-            buildConfigField "String", "APPWRITE_ENDPOINT", "\"http://192.168.1.72:80/v1\""
+            buildConfigField "String", "APPWRITE_ENDPOINT", "\"http://192.168.1.67:80/v1\""
             buildConfigField "String", "PROJECT_ID", "\"625e196b3e214519df72\""
             buildConfigField "String", "POST_COLLECTION_ID", "\"626585c53437e560f762\""
             buildConfigField "String", "NOTIFICATIONS_COLLECTION_ID", "\"626d795d27a16277bd76\""

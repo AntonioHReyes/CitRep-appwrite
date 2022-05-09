@@ -12,7 +12,7 @@
         android:title="@string/title_notifications" />
 
     <item
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_profile"
         android:icon="@drawable/ic_baseline_account_circle_24"
         android:title="@string/title_account" />
 

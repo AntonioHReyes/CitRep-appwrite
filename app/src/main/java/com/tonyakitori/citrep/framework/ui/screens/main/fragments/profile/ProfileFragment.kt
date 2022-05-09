@@ -9,19 +9,24 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.navArgs
 import com.tonyakitori.citrep.R
 import com.tonyakitori.citrep.databinding.FragmentProfileBinding
 import com.tonyakitori.citrep.domain.entities.AccountEntity
+import com.tonyakitori.citrep.framework.ui.dialogs.VerificationDialog
 import com.tonyakitori.citrep.framework.ui.screens.login.LoginActivity
-import com.tonyakitori.citrep.framework.utils.createInfoLog
 import com.tonyakitori.citrep.framework.utils.longToast
 import com.tonyakitori.citrep.framework.utils.tint
-import io.appwrite.models.Token
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ProfileFragment : Fragment() {
 
     private lateinit var binding: FragmentProfileBinding
+    private val fragmentArgs: ProfileFragmentArgs by navArgs()
+    private val verificationDialog by lazy { VerificationDialog(binding.root.context) }
 
     private val profileViewModel: ProfileViewModel by viewModel()
 
@@ -39,10 +44,31 @@ class ProfileFragment : Fragment() {
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        if (!fragmentArgs.userId.isNullOrBlank() && !fragmentArgs.secret.isNullOrBlank()) {
+            handleEmailVerification()
+            this.arguments?.clear()
+        }
+
+    }
+
+    private fun handleEmailVerification() {
+        verificationDialog.showDialog()
+        profileViewModel.confirmEmailVerification(
+            fragmentArgs.userId ?: "",
+            fragmentArgs.secret ?: ""
+        )
+    }
+
     private fun setUpViews() = with(binding) {
         verifyAccountItem.setOnClickListener {
             profileViewModel.createEmailVerification()
         }
+
+        settingsAccountItem.setOnClickListener { longToast(getString(R.string.not_implemented)) }
+        policyAccountItem.setOnClickListener { longToast(getString(R.string.not_implemented)) }
 
         accountLogOut.setOnClickListener {
             profileViewModel.logOut()
@@ -68,19 +94,53 @@ class ProfileFragment : Fragment() {
             viewLifecycleOwner,
             ::handleEmailVerificationError
         )
+
+        profileViewModel.confirmVerificationLoading.observe(
+            viewLifecycleOwner,
+            ::handleConfirmEmailLoading
+        )
+        profileViewModel.confirmVerificationData.observe(
+            viewLifecycleOwner,
+            ::handleConfirmEmailData
+        )
+        profileViewModel.confirmVerificationError.observe(
+            viewLifecycleOwner,
+            ::handleConfirmEmailError
+        )
     }
 
     private fun handleEmailVerificationLoading(show: Boolean) = with(binding) {
         generalProgress.isVisible = show
     }
 
-    private fun handleEmailVerification(data: Token?) {
-        longToast("Hemos enviado un email a tu correo para continuar con la verificación")
-        data?.createInfoLog("CreateEmailVerification")
+    private fun handleEmailVerification(tokenId: String?) {
+        longToast(getString(R.string.email_verification_send_success))
     }
 
     private fun handleEmailVerificationError(error: Unit) {
         longToast(getString(R.string.ops_error))
+    }
+
+    private fun handleConfirmEmailLoading(show: Boolean) {
+        if (show) verificationDialog.dialogStatus = VerificationDialog.VerificationStatus.PROGRESS
+    }
+
+    private fun handleConfirmEmailData(data: String?) {
+        verificationDialog.dialogStatus = VerificationDialog.VerificationStatus.SUCCESS
+        lifecycleScope.launch {
+            profileViewModel.getAccountData()
+            delay(2_500)
+            verificationDialog.dismiss()
+        }
+    }
+
+    private fun handleConfirmEmailError(event: Unit) {
+        verificationDialog.dialogStatus = VerificationDialog.VerificationStatus.ERROR
+        longToast(getString(R.string.ops_error))
+        lifecycleScope.launch {
+            delay(2_500)
+            verificationDialog.dismiss()
+        }
     }
 
     private fun handleAvatarLoading(show: Boolean) = with(binding) {
@@ -95,6 +155,7 @@ class ProfileFragment : Fragment() {
     }
 
     private fun handleAccountData(accountEntity: AccountEntity?) = with(binding) {
+        verifyAccountItem.isVisible = accountEntity?.isVerified == false
         profileName.text = accountEntity?.name.orEmpty()
         profileVerified.isVisible = true
         profileVerified.tint(

@@ -1,7 +1,6 @@
 package com.tonyakitori.citrep.data.source.remote
 
 import com.tonyakitori.citrep.domain.entities.AccountEntity
-import io.appwrite.models.Token
 
 interface AccountDataSource {
 
@@ -9,5 +8,6 @@ interface AccountDataSource {
     suspend fun createAccountSession(accountData: AccountEntity)
     suspend fun deleteAccountSession()
     suspend fun getAccount(): AccountEntity
-    suspend fun createEmailVerification(): Token
+    suspend fun createEmailVerification(): String
+    suspend fun confirmEmailVerification(userId: String, secret: String): String
 }

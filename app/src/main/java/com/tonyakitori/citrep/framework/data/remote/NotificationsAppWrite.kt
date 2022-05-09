@@ -11,6 +11,7 @@ import io.appwrite.services.Realtime
 
 class NotificationsAppWrite(private val appWriteClient: Client) : NotificationsDataSource {
 
+    private val database by lazy { Database(appWriteClient) }
     private val realtime: Realtime by lazy { Realtime(appWriteClient) }
 
     override suspend fun getNotificationsInRealTime(callback: (RealtimeResponseEvent<Any>) -> Unit) {
@@ -21,7 +22,6 @@ class NotificationsAppWrite(private val appWriteClient: Client) : NotificationsD
     }
 
     override suspend fun getNotifications(): List<NotificationEntity> {
-        val database = Database(appWriteClient)
 
         val response = database.listDocuments(BuildConfig.NOTIFICATIONS_COLLECTION_ID)
 
